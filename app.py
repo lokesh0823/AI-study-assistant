@@ -31,7 +31,10 @@ def extract_text(file):
 def ask_groq(prompt):
     response = client.chat.completions.create(
         model="llama-3.1-8b-instant",
-        messages=[{"role": "user", "content": prompt}]
+        messages=[
+            {"role": "system", "content": "You are a helpful study assistant. Answer questions directly and thoroughly based on the provided notes. Never say you don't have information if the answer is in the notes."},
+            {"role": "user", "content": prompt}
+        ]
     )
     return response.choices[0].message.content
 
